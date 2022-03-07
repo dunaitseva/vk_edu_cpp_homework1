@@ -20,7 +20,11 @@ jobs:
     needs: Formating
     steps:
       - uses: actions/checkout@v2
-      - name: Build library and check with linters
+      - name: Run linters checks
+        run: |
+          cp ./scripts/analyzers-check.sh ./analyzers-check.sh
+          ./analyzers-check.sh
+      - name: Build library and check with clang-tidy
         run: |
           sudo apt install clang-tidy
           cp ./scripts/build.sh ./build.sh

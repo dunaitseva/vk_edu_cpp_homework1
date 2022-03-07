@@ -1,6 +1,7 @@
-#include "solver.h"
-#include "stdio.h"
-#include "stdlib.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "include/solver.h"
 
 int main() {
   point_t p1 = {0, 0.02};
