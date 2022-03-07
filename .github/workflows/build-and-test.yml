@@ -9,8 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       - name: Checking coding style
         run: |
           cp ./scripts/clang-formating.sh ./clang-formating.sh
@@ -23,7 +21,6 @@ jobs:
     steps:
       - name: Build library and check with linters
         run: |
-          ls -la
           sudo apt install clang-tidy
           cp ./scripts/build.sh ./build.sh
           ./build.sh -l
