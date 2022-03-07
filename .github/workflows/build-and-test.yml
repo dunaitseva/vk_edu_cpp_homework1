@@ -15,6 +15,7 @@ jobs:
         run: |
           cp ./scripts/clang-formating.sh ./clang-formating.sh
           ./clang-formating.sh
+          rm -f clang-formating.sh
       - name: Commit files
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -25,6 +26,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           branch: dev
+
   Linters:
     name: Running linters check
     runs-on: ubuntu-latest
@@ -32,6 +34,7 @@ jobs:
     steps:
       - name: Build library and check with linters
         run: |
+          ls -la
           sudo apt install clang-tidy
           cp ./scripts/build.sh ./build.sh
           ./build.sh -l
