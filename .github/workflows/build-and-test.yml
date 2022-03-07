@@ -8,7 +8,7 @@ jobs:
     name: Automatic formatting
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 0
       - name: Formating files
@@ -23,8 +23,8 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: dev
+  #          github_token: ${{ secrets.GITHUB_TOKEN }}
   Building:
     name: Build hw solution
     runs-on: ubuntu-latest
