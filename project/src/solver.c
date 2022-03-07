@@ -33,11 +33,11 @@ int find_quadratic_coefficients(const point_t *p1,
 
   double tmp_coef_a = p1->y / diff1 + p2->y / diff2 + p3->y / diff3;
   double tmp_coef_b = ((p1->y * (p3->x + p2->x)) / diff1 +
-	                  (p2->y * (p1->x + p3->x)) / diff2 +
-					  (p3->y * (p1->x + p2->x)) / diff3) * -1.0;
+	  (p2->y * (p1->x + p3->x)) / diff2 +
+	  (p3->y * (p1->x + p2->x)) / diff3) * -1.0;
   double tmp_coef_c = (p1->y * p2->x * p3->x) / diff1 +
-	                  (p2->y * p1->x * p3->x) / diff2 +
-	                  (p3->y * p1->x * p2->x) / diff3;
+	  (p2->y * p1->x * p3->x) / diff2 +
+	  (p3->y * p1->x * p2->x) / diff3;
 
   if (coef_a != NULL) {
 	*coef_a = tmp_coef_a;
