@@ -1,14 +1,15 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-#include "parabola_builder.h"
+#include "solver.h"
 
+/*
 typedef struct {
   double x;
   double y;
 } point_t;
 
-int build_parabola(const point_t *p1,
+int find_quadratic_coefficients(const point_t *p1,
 				   const point_t *p2,
 				   const point_t *p3,
 				   double *coef_a,
@@ -35,16 +36,19 @@ int build_parabola(const point_t *p1,
 
   return 1;
 }
+*/
 
 int main() {
-  fprintf(stdout, "Hello, World!\n");
-  point_t p1 = {1, 12.3};
-  point_t p2 = {18, 1.3};
-  point_t p3 = {25, 1};
-  double a;
-  double b;
-  double c;
-  build_parabola(&p1, &p2, &p3, &a, &b, &c);
+  point_t p1 = {0, -3.5};
+//  point_t p2 = {0, -3.5};
+  point_t p2 = {0.3, 3.4};
+  point_t p3 = {0.6, 0.7};
+  double a = 0.0;
+  double b = 0.0;
+  double c = 0.0;
+  if (find_quadratic_coefficients(&p1, &p2, &p3, &a, &b, &c) != SOLUTION_FOUND) {
+	printf("Something went wrong!!!\n");
+  }
   printf("%f %f %f", a, b, c);
   return EXIT_SUCCESS;
 }
