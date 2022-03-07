@@ -4,6 +4,27 @@ defaults:
   run:
     shell: bash
 jobs:
+  Formating:
+    name: Automatic formatting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout
+        with:
+          fetch-depth: 0
+      - name: Formating files
+        run: |
+          cp ./scripts/clang-formating.sh ./clang-formating.sh
+          ./clang-formating.sh
+      - name: Commit files
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Add changes" -a
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: dev
   Building:
     name: Build hw solution
     runs-on: ubuntu-latest
