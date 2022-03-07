@@ -3,12 +3,14 @@
 TESTING_OPT=""
 SANITIZE_OPT=""
 COVERAGE_OPT=""
-while getopts "tsc" flag;
+LINTER_OPT=""
+while getopts "tscl" flag;
 do
     case "${flag}" in
         t) TESTING_OPT="-DTEST=ON";;
         s) SANITIZE_OPT="-DSANITIZE=ON";;
         c) COVERAGE_OPT="-DCOVERAGE=ON";;
+        l) LINTER_OPT="-DTIDY-CHECK=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON";;
         *) echo "Usage options -s SANITIZE or -t TESTING" && exit 1
     esac
 done
@@ -22,7 +24,7 @@ mkdir -p $TMP_DIR
 touch $LOG_FILE
 mkdir $BUILD_DIR && echo "Creating $BUILD_DIR directory"
 
-CMAKE_KEYS="$TESTING_OPT $SANITIZE_OPT $COVERAGE_OPT"
+CMAKE_KEYS="$TESTING_OPT $SANITIZE_OPT $COVERAGE_OPT $LINTER_OPT"
 echo "CMakeFile.txt will execute with $CMAKE_KEYS options"
 
 echo "Executing CMakeFile.txt"

@@ -21,8 +21,9 @@ add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/main.c)
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_LIB_INCLUDE_DIR})
 target_link_libraries(${PROJECT_NAME} PUBLIC ${PROJECT_CORE_LIB_NAME})
 
+# This part of provides testing with gtest Google C++ Testing Framework
 option(TEST "Enable testing" OFF)
-if(TEST)
+if (TEST)
     include(FetchContent)
     FetchContent_Declare(
             googletest
@@ -40,4 +41,16 @@ if(TEST)
 
     include(GoogleTest)
     gtest_discover_tests(solver_test)
-endif()
+endif ()
+
+# This part of provides clang-tidy code analise
+option(TIDY-CHECK "Enable clang-tidy check" OFF)
+if (TIDY-CHECK)
+    set(SOURCES ../project/src/solver.c ../project/main.c)
+
+    add_custom_target(
+            clang-tidy-check clang-tidy -p ${CMAKE_BINARY_DIR}/compile_commands.json -checks=cert* ${SOURCES}
+            DEPENDS ${sources})
+
+    add_custom_target(check DEPENDS clang-tidy-check)
+endif ()

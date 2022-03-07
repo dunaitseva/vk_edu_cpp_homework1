@@ -25,7 +25,19 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           branch: dev
-  #          github_token: ${{ secrets.GITHUB_TOKEN }}
+  Linters:
+    name: Running linters checks
+    runs-on: ubuntu-latest
+    needs: Formating
+    steps:
+      - name: Build library and check with linters
+        run: |
+          sudo apt install clang-tidy
+          cp ./scripts/build.sh ./build.sh
+          ./build.sh -l
+          cd build
+          make clang-tidy-check
+
   Building:
     name: Build hw solution
     runs-on: ubuntu-latest
