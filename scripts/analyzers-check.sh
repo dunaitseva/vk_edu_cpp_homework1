@@ -27,14 +27,14 @@ sudo apt-get -qq install cppcheck
 
 SOURCES_DIR="project"
 echo "START ANALYZE cppcheck"
-cppcheck $SOURCES_DIR || exit 1
+cppcheck $SOURCES_DIR || ( echo "cppcheck check failed" && exit 1)
 
 echo "START ANALYZE cpplint"
-cpplint --recursive --filter=-legal/copyright $SOURCES_DIR || exit 1
+cpplint --recursive --filter=-legal/copyright $SOURCES_DIR ||( echo "cpplint check failed" && exit 1)
 
 echo "START ANALYZE scan-build"
 cd build
-scan-build make parabola_builder || exit 1
-scan-build make parabola_solver || exit 1
+scan-build make parabola_builder || ( echo "scan-build check failed" && exit 1)
+scan-build make parabola_solver || ( echo "scan-build check failed" && exit 1)
 
 
