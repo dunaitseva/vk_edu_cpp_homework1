@@ -17,3 +17,6 @@ cmake-build-debug/*
 
 # build directories
 build/*
+
+# Temple derictories
+tmp/*

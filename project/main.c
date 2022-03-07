@@ -39,10 +39,9 @@ int find_quadratic_coefficients(const point_t *p1,
 */
 
 int main() {
-  point_t p1 = {0, -3.5};
-//  point_t p2 = {0, -3.5};
-  point_t p2 = {0.3, 3.4};
-  point_t p3 = {0.6, 0.7};
+  point_t p1 = {0, 0.02};
+  point_t p2 = {0.3, 0.4};
+  point_t p3 = {0.6, 0.07};
   double a = 0.0;
   double b = 0.0;
   double c = 0.0;
