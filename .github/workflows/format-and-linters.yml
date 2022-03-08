@@ -11,8 +11,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Checking coding style
         run: |
-          cp ./scripts/clang-formating.sh ./clang-formating.sh
-          ./clang-formating.sh
+          ./scripts/clang-formating.sh
 
   Linters:
     name: Running linters check
@@ -22,14 +21,11 @@ jobs:
       - uses: actions/checkout@v2
       - name: Run linters checks
         run: |
-          cp ./scripts/build.sh ./build.sh
-          ./build.sh -lt
-          cp ./scripts/analyzers-check.sh ./analyzers-check.sh
-          ./analyzers-check.sh
+          ./scripts/build.sh -lt
+          ./scripts/analyzers-check.sh
       - name: Build library and check with clang-tidy
         run: |
           sudo apt install clang-tidy
-          cp ./scripts/build.sh ./build.sh
-          ./build.sh -l
+          ./scripts/build.sh -l
           cd build
-          make clang-tidy-check
+          make linter-check
