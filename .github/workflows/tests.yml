@@ -9,15 +9,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Testing
+      - name: Build Tests
         run: |
           sudo apt update
           sudo apt install valgrind
+          export ASAN_OPTIONS=verify_asan_link_order=0
           ./scripts/build.sh -tc
           cd build
           make
-          valgrind --tool=memcheck --error-exitcode=127 ./SolverTests
           cd ..
+      - name: Run SolverTests
+        run: valgrind --tool=memcheck ./build/SolverTests
       - name: Generate coverage report
         run: |
           ./scripts/coverage-generator.sh
