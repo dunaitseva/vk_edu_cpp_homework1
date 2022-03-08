@@ -52,23 +52,44 @@ if (TEST)
     foreach (file IN ITEMS ${SolverTestsSRC})
         message("${file} TEST FILE FOUND")
         get_filename_component(testing_target ${file} NAME_WE)
+
+        # Adding executable tests without sanitizers
         add_executable(${testing_target} ${file})
         target_link_libraries(${testing_target} gtest_main)
         target_link_libraries(${testing_target} ${PROJECT_CORE_LIB_NAME})
-        message("${testing_target} TARGET CREATED")
-        set(testing_targets ${testing_targets};${testing_target})
+
+        # Adding executable tests with Address sanitizer
+        add_executable(${testing_target}Address ${file})
+        target_link_libraries(${testing_target}Address gtest_main)
+        target_link_libraries(${testing_target}Address ${PROJECT_CORE_LIB_NAME})
+        target_compile_options(${testing_target}Address PUBLIC -fsanitize=address)
+        target_link_options(${testing_target}Address PUBLIC -fsanitize=address)
+
+        # Adding executable tests with Thread sanitizer
+        add_executable(${testing_target}Thread ${file})
+        target_link_libraries(${testing_target}Thread gtest_main)
+        target_link_libraries(${testing_target}Thread ${PROJECT_CORE_LIB_NAME})
+        target_compile_options(${testing_target}Thread PUBLIC -fsanitize=thread)
+        target_link_options(${testing_target}Thread PUBLIC -fsanitize=thread)
+
+        # Adding executable tests with Undefined sanitizer
+        add_executable(${testing_target}Undefined ${file})
+        target_link_libraries(${testing_target}Undefined gtest_main)
+        target_link_libraries(${testing_target}Undefined ${PROJECT_CORE_LIB_NAME})
+        target_compile_options(${testing_target}Undefined PUBLIC -fsanitize=undefined)
+        target_link_options(${testing_target}Undefined PUBLIC -fsanitize=undefined)
+
+        message("${testing_target} TARGET TESTS KIT CREATED")
+
+        set(testing_targets
+                ${testing_targets};${testing_target};${testing_target}Address;${testing_target}Thread;${testing_target}Undefined
+        )
     endforeach ()
 
     message("TESTING TARGETS TOTAL: ${testing_targets}")
 
     include(GoogleTest)
     foreach (target IN ITEMS ${testing_targets})
-        target_compile_options(${target} PUBLIC -fsanitize=address)
-        target_link_options(${target} PUBLIC -fsanitize=address)
-        target_compile_options(${target} PUBLIC -fsanitize=undefined)
-        target_link_options(${target} PUBLIC -fsanitize=undefined)
-#        target_compile_options(${target} PUBLIC -fsanitize=thread)
-#        target_link_options(${target} PUBLIC -fsanitize=thread)
         gtest_discover_tests(${target})
     endforeach ()
 endif ()

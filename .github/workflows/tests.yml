@@ -18,8 +18,12 @@ jobs:
           cd build
           make
           cd ..
-      - name: Run SolverTests
-        run: valgrind --tool=memcheck ./build/SolverTests
+      - name: Run Tests
+        run: |
+          valgrind --tool=memcheck ./build/SolverTests
+          ./build/SolverTestsAddress
+          ./build/SolverTestsThread
+          ./build/SolverTestsUndefined
       - name: Generate coverage report
         run: |
           ./scripts/coverage-generator.sh
