@@ -3,7 +3,7 @@
 #include <cstddef>
 
 extern "C" {
-#include "solver.h"
+#include "../include/solver.h"
 }
 
 constexpr double ABS_SOL_ERROR = 1e-5;
