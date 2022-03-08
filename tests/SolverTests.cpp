@@ -72,7 +72,12 @@ TEST(SolverTestInput, LinearityPropertiesValid) {
 
 TEST(SolverTestInput, LinearityPropertiesInvalid) {
   point_t p1 = {1.0, 1.0};
+  point_t p2 = {0.0, 0.0};
 
-  ASSERT_EQ(find_quadratic_coefficients(&p1, &p1, &p1, NULL, NULL, NULL),
+  ASSERT_EQ(find_quadratic_coefficients(&p1, &p1, &p2, NULL, NULL, NULL),
             NON_INDEPENDENT_SYSTEM);
+  ASSERT_EQ(find_quadratic_coefficients(&p1, &p2, &p1, NULL, NULL, NULL),
+			NON_INDEPENDENT_SYSTEM);
+  ASSERT_EQ(find_quadratic_coefficients(&p2, &p1, &p1, NULL, NULL, NULL),
+			NON_INDEPENDENT_SYSTEM);
 }
