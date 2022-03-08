@@ -23,13 +23,13 @@ jobs:
       - name: Run linters checks
         run: |
           cp ./scripts/build.sh ./build.sh
-          ./build.sh
+          ./build.sh -lt
           cp ./scripts/analyzers-check.sh ./analyzers-check.sh
           ./analyzers-check.sh
       - name: Build library and check with clang-tidy
         run: |
           sudo apt install clang-tidy
           cp ./scripts/build.sh ./build.sh
-          ./build.sh -lt
+          ./build.sh -l
           cd build
           make clang-tidy-check

@@ -57,8 +57,9 @@ if (TIDY-CHECK)
     set(SOURCES ../project/src/solver.c ../project/main.c)
 
     add_custom_target(
-            clang-tidy-check clang-tidy -p ${CMAKE_BINARY_DIR}/compile_commands.json -checks=cert* ${SOURCES}
-            DEPENDS ${sources})
+            clang-tidy-check-code clang-tidy -p ${CMAKE_BINARY_DIR}/compile_commands.json ${CLANG_TIDY_FLAGS} ${SOURCES}
+            DEPENDS ${SOURCES}
+    )
 
-    add_custom_target(check DEPENDS clang-tidy-check)
+    add_custom_target(clang-tidy-check DEPENDS clang-tidy-check-code)
 endif ()
