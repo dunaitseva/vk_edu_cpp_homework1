@@ -1,4 +1,4 @@
-name: Build-and-checks
+name: Tests passing
 on: [ push ]
 defaults:
   run:
@@ -11,6 +11,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Testing
         run: |
+          sudo apt install valgrind
           ./scripts/build.sh -tc
           cd build
           make

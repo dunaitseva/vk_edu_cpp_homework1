@@ -1,4 +1,4 @@
-name: Build-and-checks
+name: Linters passes
 on: [ push ]
 defaults:
   run:
