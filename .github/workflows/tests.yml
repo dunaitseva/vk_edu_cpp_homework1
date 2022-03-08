@@ -24,7 +24,7 @@ jobs:
           ./build/SolverTestsAddress
           ./build/SolverTestsThread
           ./build/SolverTestsUndefined
-      name: Run Tests PointTests
+      - name: Run Tests PointTests
         run: |
           valgrind --tool=memcheck ./build/PointTests
           ./build/PointTestsAddress
