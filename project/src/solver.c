@@ -66,7 +66,7 @@ static int is_independent(const point_t *p1, const point_t *p2,
     return 0;
   }
 
-  if (p1->x == p3->x && p1->y == p2->y) {
+  if (p1->x == p3->x && p1->y == p3->y) {
     return 0;
   }
 
