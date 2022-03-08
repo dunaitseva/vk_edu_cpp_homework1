@@ -3,7 +3,7 @@
 
 ![build](https://github.com/dunaitseva/vk_edu_cpp_homework1/actions/workflows/build.yml/badge.svg)
 ![formating and linters](https://github.com/dunaitseva/vk_edu_cpp_homework1/actions/workflows/format-and-linters.yml/badge.svg)
-[![codecov](https://codecov.io/gh/dunaitseva/vk_edu_cpp_homework1/branch/main/graph/badge.svg?token=C7VXLY46X7)](https://codecov.io/gh/dunaitseva/vk_edu_cpp_homework1)
+[![codecov](https://codecov.io/gh/dunaitseva/vk_edu_cpp_homework1/branch/dev/graph/badge.svg?token=C7VXLY46X7)](https://codecov.io/gh/dunaitseva/vk_edu_cpp_homework1)
 
 ### Постановка задачи:
 
