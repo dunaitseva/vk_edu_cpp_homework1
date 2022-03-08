@@ -13,7 +13,7 @@ touch $TMP_FORM_FILE
 STYLE="Google"
 FORMATING_FILES=("./project/main.c" "./project/src/solver.c" \
                  "./project/include/solver.h" "project/include/point.h" \
-                 "project/src/point.c" "./tests/solver/SolverTests.cpp")
+                 "project/src/point.c" "./tests/core/SolverTests.cpp")
 for file in ${FORMATING_FILES[*]}
 do
     echo $file
