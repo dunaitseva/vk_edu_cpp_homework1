@@ -1,10 +1,7 @@
 #ifndef PROJECT_INCLUDE_SOLVER_H_
 #define PROJECT_INCLUDE_SOLVER_H_
 
-typedef struct {
-  double x;
-  double y;
-} point_t;
+#include "./point.h"
 
 typedef enum {
   SOLUTION_FOUND,

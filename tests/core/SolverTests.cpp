@@ -1,14 +1,12 @@
 #include <gtest/gtest.h>
 
-#include <cstddef>
-
 extern "C" {
 #include "../include/solver.h"
 }
 
 constexpr double ABS_SOL_ERROR = 1e-5;
 
-struct SolverTestsSolution : public testing::Test {
+struct SolverTestsSolution : public ::testing::Test {
  protected:
   point_t p1 = {0, 0.02};
   point_t p2 = {0.3, 0.4};

@@ -14,7 +14,7 @@ set(PROJECT_LIB_SOURCE_DIR ${PROJECT_SOURCE_DIR}/src)
 set(PROJECT_LIB_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 set(PROJECT_CORE_LIB_NAME parabola_solver)
 
-add_library(${PROJECT_CORE_LIB_NAME} ${PROJECT_LIB_SOURCE_DIR}/solver.c)
+add_library(${PROJECT_CORE_LIB_NAME} ${PROJECT_LIB_SOURCE_DIR}/solver.c ${PROJECT_LIB_SOURCE_DIR}/point.c)
 target_include_directories(${PROJECT_CORE_LIB_NAME} PUBLIC ${PROJECT_LIB_INCLUDE_DIR})
 message("Added solver library with name ${PROJECT_CORE_LIB_NAME}")
 
@@ -46,7 +46,7 @@ if (TEST)
     enable_testing()
     message("Google C++ Testing Framework loaded")
 
-    file(GLOB SolverTestsSRC "tests/solver/*.cpp")
+    file(GLOB SolverTestsSRC "tests/core/*.cpp")
     file(GLOB InterfaceTestsSRC "tests/interface/*.cpp")
     set(testing_targets)
     foreach (file IN ITEMS ${SolverTestsSRC})
@@ -98,7 +98,8 @@ endif ()
 option(LINTERS-CHECK "Enable clang-tidy check" OFF)
 if (LINTERS-CHECK)
     message("Enabled clang-tidy sources check")
-    set(SOURCES ../project/src/solver.c ../project/main.c)
+    file(GLOB SOURCES project/*.c)
+#    set(SOURCES ../project/src/solver.c ../project/main.c)
 
     add_custom_target(
             clang-tidy-check-code clang-tidy -p ${CMAKE_BINARY_DIR}/compile_commands.json  ${SOURCES}

@@ -39,7 +39,7 @@ cppcheck $dir
 RET_CODE=$(($RET_CODE + $?))
 
 echo "START ANALYZE cpplint"
-cpplint --recursive --filter=-legal/copyright $dir
+cpplint --recursive --filter=-legal/copyright,-readability/casting $dir
 RET_CODE=$(($RET_CODE + $?))
 done
 
