@@ -1,7 +1,8 @@
 # vk_edu_cpp_homework1
 Домашняя работа 1 по курсу "Углубленное программирование на языке С/С++", выполняемая в рамках проекта Образовательный центр VK
 
-![example workflow](https://github.com/dunaitseva/vk_edu_cpp_homework1/actions/workflows/build-and-test.yml/badge.svg)
+![example workflow](https://github.com/dunaitseva/vk_edu_cpp_homework1/actions/workflows/build.yml/badge.svg)
+![example workflow](https://github.com/dunaitseva/vk_edu_cpp_homework1/actions/workflows/format-and-linters.yml/badge.svg)
 
 ### Постановка задачи:
 
