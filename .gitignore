@@ -20,3 +20,6 @@ build/*
 
 # Temple derictories
 tmp/*
+
+# Generated files in root of project
+coverage.xml

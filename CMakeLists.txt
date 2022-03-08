@@ -16,6 +16,12 @@ set(PROJECT_CORE_LIB_NAME parabola_solver)
 
 add_library(${PROJECT_CORE_LIB_NAME} ${PROJECT_LIB_SOURCE_DIR}/solver.c)
 target_include_directories(${PROJECT_CORE_LIB_NAME} PUBLIC ${PROJECT_LIB_INCLUDE_DIR})
+# Enable generating coverage report in testing process
+option(COVERAGE "Enable generating coverage report" OFF)
+if (COVERAGE)
+    target_compile_options(${PROJECT_CORE_LIB_NAME} PUBLIC "--coverage")
+    target_link_libraries(${PROJECT_CORE_LIB_NAME} PUBLIC gcov)
+endif()
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/main.c)
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_LIB_INCLUDE_DIR})
@@ -24,14 +30,6 @@ target_link_libraries(${PROJECT_NAME} PUBLIC ${PROJECT_CORE_LIB_NAME})
 # This part of provides testing with gtest Google C++ Testing Framework
 option(TEST "Enable testing" OFF)
 if (TEST)
-
-    # Enable generating coverage report in testing process
-    option(COVERAGE "Enable generating coverage report" OFF)
-    if (COVERAGE)
-    target_compile_options(${PROJECT_CORE_LIB_NAME} PUBLIC "--coverage")
-    target_link_libraries(${PROJECT_CORE_LIB_NAME} PUBLIC gcov)
-    endif()
-
     include(FetchContent)
     FetchContent_Declare(
             googletest

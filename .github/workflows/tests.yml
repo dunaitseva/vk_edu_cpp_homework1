@@ -1,0 +1,27 @@
+name: Build-and-checks
+on: [ push ]
+defaults:
+  run:
+    shell: bash
+jobs:
+  Testing:
+    name: Run tests and generate coverage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Testing
+        run: |
+          cp ./scripts/build.sh ./build.sh
+          ./build.sh -tc
+          cd build
+          ctest
+          cd ..
+      - name: Generate coverage report
+        run: |
+          cp ./scripts/coverage-generator.sh coverage-generator.sh
+          ./coverage-generator.sh
+      - name:  Getting code coverage data
+        uses: codecov/codecov-action@v2
+        with:
+#          token: ff897e5c-ceb7-4d09-bf59-0b98873ba7fc
+          files: coverage.xml
