@@ -32,7 +32,7 @@ point_t *read_point(FILE *stream, int *err) {
   int read_status = fscanf(stream, POINT_INPUT_FORMAT, x_string_repr,
                            y_string_repr, &tail_sym);
   if (read_status == EOF || read_status < INPUT_ITEMS_COUNT ||
-      tail_sym != '}') {
+      tail_sym != BRACKET_TAIL) {
     set_err_status(err, EFMTI);
     return NULL;
   }

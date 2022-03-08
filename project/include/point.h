@@ -6,6 +6,7 @@
 #define INPUT_ITEMS_COUNT 3
 #define MAX_CONSOLE_INPUT 161
 #define POINT_INPUT_FORMAT "{%80[.0-9e-]; %80[.0-9e-]%1c"
+#define BRACKET_TAIL '}'
 
 typedef struct {
   double x;
