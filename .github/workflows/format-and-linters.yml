@@ -30,6 +30,6 @@ jobs:
         run: |
           sudo apt install clang-tidy
           cp ./scripts/build.sh ./build.sh
-          ./build.sh -l
+          ./build.sh -lt
           cd build
           make clang-tidy-check
