@@ -11,4 +11,4 @@ EXCLUDING_FILES=".*_deps.*|.*tests.*|project/main.c"
 #EXCLUDING_FILES=".*_deps.*"
 REPORT_FILE_NAME="coverage.xml"
 gcovr -r . ./build -e $EXCLUDING_FILES -o $REPORT_FILE_NAME --xml
-gcovr -r . ./build -e $EXCLUDING_FILES
+#gcovr -r . ./build -e $EXCLUDING_FILES
