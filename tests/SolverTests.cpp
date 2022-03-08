@@ -53,11 +53,11 @@ TEST_F(SolverTestsSolution, InterpolationProperties) {
 TEST(SolverTestInput, NullPoints) {
   point_t p1;
 
-  ASSERT_EQ(find_quadratic_coefficients(NULL, &p1, &p1, NULL, NULL, NULL),
+  ASSERT_EQ(find_quadratic_coefficients(nullptr, &p1, &p1, nullptr, nullptr, nullptr),
             WRONG_INPUT);
-  ASSERT_EQ(find_quadratic_coefficients(&p1, NULL, &p1, NULL, NULL, NULL),
+  ASSERT_EQ(find_quadratic_coefficients(&p1, nullptr, &p1, nullptr, nullptr, nullptr),
             WRONG_INPUT);
-  ASSERT_EQ(find_quadratic_coefficients(&p1, &p1, NULL, NULL, NULL, NULL),
+  ASSERT_EQ(find_quadratic_coefficients(&p1, &p1, nullptr, nullptr, nullptr, nullptr),
             WRONG_INPUT);
 }
 
@@ -66,7 +66,7 @@ TEST(SolverTestInput, LinearityPropertiesValid) {
   point_t p2 = {2.0, 2.0};
   point_t p3 = {3.0, 3.0};
 
-  ASSERT_EQ(find_quadratic_coefficients(&p1, &p2, &p3, NULL, NULL, NULL),
+  ASSERT_EQ(find_quadratic_coefficients(&p1, &p2, &p3, nullptr, nullptr, nullptr),
             SOLUTION_FOUND);
 }
 
@@ -74,10 +74,10 @@ TEST(SolverTestInput, LinearityPropertiesInvalid) {
   point_t p1 = {1.0, 1.0};
   point_t p2 = {0.0, 0.0};
 
-  ASSERT_EQ(find_quadratic_coefficients(&p1, &p1, &p2, NULL, NULL, NULL),
+  ASSERT_EQ(find_quadratic_coefficients(&p1, &p1, &p2, nullptr, nullptr, nullptr),
             NON_INDEPENDENT_SYSTEM);
-  ASSERT_EQ(find_quadratic_coefficients(&p1, &p2, &p1, NULL, NULL, NULL),
+  ASSERT_EQ(find_quadratic_coefficients(&p1, &p2, &p1, nullptr, nullptr, nullptr),
             NON_INDEPENDENT_SYSTEM);
-  ASSERT_EQ(find_quadratic_coefficients(&p2, &p1, &p1, NULL, NULL, NULL),
+  ASSERT_EQ(find_quadratic_coefficients(&p2, &p1, &p1, nullptr, nullptr, nullptr),
             NON_INDEPENDENT_SYSTEM);
 }
