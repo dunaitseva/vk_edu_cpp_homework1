@@ -14,7 +14,7 @@ jobs:
           ./scripts/build.sh -tc
           cd build
           make
-          ctest
+          valgrind --tool=memcheck ./SolverTests
           cd ..
       - name: Generate coverage report
         run: |
