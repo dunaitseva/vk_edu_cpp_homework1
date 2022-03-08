@@ -55,7 +55,4 @@ RET_CODE=$(($RET_CODE + $?))
 scan-build make parabola_solver
 RET_CODE=$(($RET_CODE + $?))
 
-scan-build make solver_test
-RET_CODE=$(($RET_CODE + $?))
-
 exit $RET_CODE
