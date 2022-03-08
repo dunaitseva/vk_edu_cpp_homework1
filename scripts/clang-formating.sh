@@ -11,7 +11,7 @@ touch $TMP_FORM_FILE
 #sudo apt install clang-format >> $LOG_FILE
 
 STYLE="Google"
-FORMATING_FILES=("./project/main.c" "./project/src/solver.c" "./project/include/solver.h" "./tests/SolverTests.cpp")
+FORMATING_FILES=("./project/main.c" "./project/src/solver.c" "./project/include/solver.h" "./tests/solver/SolverTests.cpp")
 for file in ${FORMATING_FILES[*]}
 do
     echo $file
