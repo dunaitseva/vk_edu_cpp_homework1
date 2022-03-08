@@ -14,7 +14,7 @@ jobs:
           ./scripts/build.sh -tc
           cd build
           make
-          valgrind --tool=memcheck --error-exitcode=1 ./SolverTests
+          valgrind --tool=memcheck --error-exitcode=127 ./SolverTests
           cd ..
       - name: Generate coverage report
         run: |
