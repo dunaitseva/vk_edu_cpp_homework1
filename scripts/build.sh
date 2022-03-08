@@ -10,7 +10,7 @@ do
         t) TESTING_OPT="-DTEST=ON";;
         s) SANITIZE_OPT="-DSANITIZE=ON";;
         c) COVERAGE_OPT="-DCOVERAGE=ON";;
-        l) LINTER_OPT="-DTIDY-CHECK=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON";;
+        l) LINTER_OPT="-DLINTERS-CHECK=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON";;
         *) echo "Usage options -s SANITIZE or -t TESTING" && exit 1
     esac
 done
@@ -30,7 +30,7 @@ echo "CMakeFile.txt will execute with $CMAKE_KEYS options"
 echo "Executing CMakeFile.txt"
 cmake $CMAKE_KEYS -B $BUILD_DIR -S . >> $LOG_FILE || (echo "Error, check $LOG_FILE")
 
-echo "Build targets with make"
-make --directory=$BUILD_DIR >> $LOG_FILE || (echo "Error, check $LOG_FILE")
+#echo "Build targets with make"
+#make --directory=$BUILD_DIR >> $LOG_FILE || (echo "Error, check $LOG_FILE")
 
 echo "REBUILD FINISHED!"

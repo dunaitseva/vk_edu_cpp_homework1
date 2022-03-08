@@ -7,11 +7,16 @@ touch $LOG_FILE
 mkdir $BUILD_DIR && echo "Creating $BUILD_DIR directory"
 
 # Installing fbinfer
-#echo "START INSTALLING fbinfer"
-#VERSION=1.0.0;
-#curl -sSL "https://github.com/facebook/infer/releases/download/v$VERSION/infer-linux64-v$VERSION.tar.xz" | sudo tar -C /opt -xJ
-#sudo ln -s "/opt/infer-linux64-v$VERSION/bin/infer" /usr/local/bin/infer
-
+echo "START INSTALLING fbinfer"
+#FILE=/opt/infer-linux64-v$VERSION/bin/infer
+#if test -f "$FILE"; then
+#    echo "$FILE exists."
+#else
+#  VERSION=1.0.0; \
+#  curl -sSL "https://github.com/facebook/infer/releases/download/v$VERSION/infer-linux64-v$VERSION.tar.xz" \
+#  | sudo tar -C /opt -xJ && \
+#  sudo ln -s "/opt/infer-linux64-v$VERSION/bin/infer" /usr/local/bin/infer
+#fi
 
 # Installing cpplint
 echo "START INSTALLING cpplint"
@@ -37,6 +42,10 @@ echo "START ANALYZE cpplint"
 cpplint --recursive --filter=-legal/copyright $dir
 RET_CODE=$(($RET_CODE + $?))
 done
+
+echo "START ANALYZE fbinfer"
+./scripts/build.sh -l
+infer run --compilation-database build/compile_commands.json
 
 echo "START ANALYZE scan-build"
 cd build
