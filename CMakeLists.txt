@@ -24,6 +24,14 @@ target_link_libraries(${PROJECT_NAME} PUBLIC ${PROJECT_CORE_LIB_NAME})
 # This part of provides testing with gtest Google C++ Testing Framework
 option(TEST "Enable testing" OFF)
 if (TEST)
+
+    # Enable generating coverage report in testing process
+    option(COVERAGE "Enable generating coverage report" OFF)
+    if (COVERAGE)
+    target_compile_options(${PROJECT_CORE_LIB_NAME} PUBLIC "--coverage")
+    target_link_libraries(${PROJECT_CORE_LIB_NAME} PUBLIC gcov)
+    endif()
+
     include(FetchContent)
     FetchContent_Declare(
             googletest

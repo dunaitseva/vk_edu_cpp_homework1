@@ -25,16 +25,28 @@ sudo apt-get -qq install clang-tools
 echo "START INSTALLING cppcheck"
 sudo apt-get -qq install cppcheck
 
-SOURCES_DIR="project"
+RET_CODE=0
+SOURCES_DIRS=("project" "tests")
+for dir in ${SOURCES_DIRS[*]}
+do
 echo "START ANALYZE cppcheck"
-cppcheck $SOURCES_DIR || ( echo "cppcheck check failed" && exit 1)
+cppcheck $dir
+RET_CODE=$(($RET_CODE + $?))
 
 echo "START ANALYZE cpplint"
-cpplint --recursive --filter=-legal/copyright $SOURCES_DIR ||( echo "cpplint check failed" && exit 1)
+cpplint --recursive --filter=-legal/copyright $dir
+RET_CODE=$(($RET_CODE + $?))
+done
 
 echo "START ANALYZE scan-build"
 cd build
-scan-build make parabola_builder || ( echo "scan-build check failed" && exit 1)
-scan-build make parabola_solver || ( echo "scan-build check failed" && exit 1)
+scan-build make parabola_builder
+RET_CODE=$(($RET_CODE + $?))
 
+scan-build make parabola_solver
+RET_CODE=$(($RET_CODE + $?))
 
+scan-build make solver_test
+RET_CODE=$(($RET_CODE + $?))
+
+exit $RET_CODE
