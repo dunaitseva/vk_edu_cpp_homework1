@@ -11,15 +11,14 @@ jobs:
       - uses: actions/checkout@v2
       - name: Testing
         run: |
-          cp ./scripts/build.sh ./build.sh
-          ./build.sh -tc
+          ./scripts/build.sh -tc
           cd build
+          make
           ctest
           cd ..
       - name: Generate coverage report
         run: |
-          cp ./scripts/coverage-generator.sh coverage-generator.sh
-          ./coverage-generator.sh
+          ./scripts/coverage-generator.sh
       - name:  Getting code coverage data
         uses: codecov/codecov-action@v2
         with:
