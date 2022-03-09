@@ -56,6 +56,10 @@ point_t *read_point(FILE *stream, int *err) {
   return result_point;
 }
 
+// point_t *create_point_from_string(char *str_point_repr, int *err) {
+//  if ()
+// }
+
 int delete_point(point_t *point) {
   if (point == NULL) {
     return -1;
@@ -67,7 +71,7 @@ int delete_point(point_t *point) {
 
 /*
  * Following function is util for set err variable in defined code
- * if pointer to variable is not null in one command
+ * if pointer to variable is not null in one command.
  */
 static void set_err_status(int *err_storage, int err_code) {
   if (err_storage != NULL) {

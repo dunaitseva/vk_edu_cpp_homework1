@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "include/point.h"
-#include "include/solver.h"
+#include "include/dispatcher.h"
 
-int main() { return EXIT_SUCCESS; }
+int main() {
+//  dispatch(stdin, stdout, stderr);
+  return EXIT_SUCCESS;
+}

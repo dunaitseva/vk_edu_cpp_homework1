@@ -34,6 +34,7 @@ endif ()
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/main.c)
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_LIB_INCLUDE_DIR})
 target_link_libraries(${PROJECT_NAME} PUBLIC ${PROJECT_CORE_LIB_NAME})
+target_link_libraries(${PROJECT_NAME} PUBLIC ${PROJECT_INTERFACE_LIB_NAME})
 message("Created app target with name ${PROJECT_NAME}")
 
 # This part of provides testing with gtest Google C++ Testing Framework
