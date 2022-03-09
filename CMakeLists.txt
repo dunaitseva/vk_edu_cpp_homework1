@@ -13,10 +13,15 @@ set(PROJECT_SOURCE_DIR project)
 set(PROJECT_LIB_SOURCE_DIR ${PROJECT_SOURCE_DIR}/src)
 set(PROJECT_LIB_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 set(PROJECT_CORE_LIB_NAME parabola_solver)
+set(PROJECT_INTERFACE_LIB_NAME interface)
 
 add_library(${PROJECT_CORE_LIB_NAME} ${PROJECT_LIB_SOURCE_DIR}/solver.c ${PROJECT_LIB_SOURCE_DIR}/point.c)
 target_include_directories(${PROJECT_CORE_LIB_NAME} PUBLIC ${PROJECT_LIB_INCLUDE_DIR})
 message("Added solver library with name ${PROJECT_CORE_LIB_NAME}")
+
+add_library(${PROJECT_INTERFACE_LIB_NAME} ${PROJECT_LIB_SOURCE_DIR}/dispatcher.c)
+target_include_directories(${PROJECT_INTERFACE_LIB_NAME} PUBLIC ${PROJECT_LIB_INCLUDE_DIR})
+message("Added solver library with name ${PROJECT_INTERFACE_LIB_NAME}")
 
 # Enable generating coverage report in testing process
 option(COVERAGE "Enable generating coverage report" OFF)
