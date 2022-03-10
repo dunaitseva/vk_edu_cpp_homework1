@@ -6,7 +6,7 @@ mkdir -p $TMP_DIR
 touch $LOG_FILE
 mkdir $BUILD_DIR && echo "Creating $BUILD_DIR directory"
 
-# Installing fbinfer
+#Installing fbinfer
 echo "START INSTALLING fbinfer"
 FILE=/opt/infer-linux64-v$VERSION/bin/infer
 if test -f "$FILE"; then
