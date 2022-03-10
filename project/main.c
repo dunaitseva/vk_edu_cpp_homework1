@@ -10,6 +10,7 @@
   "from 3 points on a plane.\n"                \
   "----------------------------------------\n"
 #define PARTING "Thanks for using\n"
+#define ERROR_MODE_MSG "Error. Work only with 1 or 3 arguments.\n"
 
 int main(int argc, char *argv[]) {
   printf("%s", GREETING);

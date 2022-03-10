@@ -16,7 +16,6 @@
 #define CONSOLE_APP_MODE 1
 
 // Error messages
-#define ERROR_MODE_MSG "Error. Work only with 1 or 3 arguments.\n"
 #define EFMTI_MSG "Error in point input format. Format sample {12.3; 23e-2}.\n"
 #define EREPR_MSG "Invalid number format\n"
 #define NON_IND_MSG "Solution was not found, non independent system\n"
