@@ -191,3 +191,20 @@ TEST(CreatePointFromString, InorrectArguments4) {
   ASSERT_EQ(err, EFMTI);
   delete_point(p);
 }
+
+TEST(CreatePointFromString, EmptyString1) {
+  int err = 0;
+  point_t *p = create_point_from_string(nullptr, 0, &err);
+  EXPECT_EQ(p, nullptr);
+  ASSERT_EQ(err, EEMTYSTR);
+  delete_point(p);
+}
+
+TEST(CreatePointFromString, EmptyString2) {
+  char c;
+  int err = 0;
+  point_t *p = create_point_from_string(&c, 0, &err);
+  EXPECT_EQ(p, nullptr);
+  ASSERT_EQ(err, EEMTYSTR);
+  delete_point(p);
+}
