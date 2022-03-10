@@ -6,8 +6,8 @@
 #include "../include/point.h"
 #include "../include/solver.h"
 
-static int show_solution(point_t *points[REQ_POINTS_AMOUNT], FILE *os,
-                         FILE *es);
+static void show_solution(point_t *points[REQ_POINTS_AMOUNT], FILE *os,
+                          FILE *es);
 static void free_resources(point_t *points[REQ_POINTS_AMOUNT]);
 static void print_error_msg(int err, FILE *es);
 static int solution_command(FILE *is, FILE *os, FILE *es);
@@ -98,9 +98,9 @@ static int solution_command(FILE *is, FILE *os, FILE *es) {
     fgetc(is);
   }
 
-  int status = show_solution(points, os, es);
+  show_solution(points, os, es);
   free_resources(points);
-  return status;
+  return 1;
 }
 
 static void print_error_msg(int err, FILE *es) {
@@ -116,8 +116,8 @@ static void print_error_msg(int err, FILE *es) {
   }
 }
 
-static int show_solution(point_t *points[REQ_POINTS_AMOUNT], FILE *os,
-                         FILE *es) {
+static void show_solution(point_t *points[REQ_POINTS_AMOUNT], FILE *os,
+                          FILE *es) {
   double a_coef;
   double b_coef;
   double c_coef;
@@ -125,15 +125,11 @@ static int show_solution(point_t *points[REQ_POINTS_AMOUNT], FILE *os,
                                         &a_coef, &b_coef, &c_coef);
   if (err == SOLUTION_FOUND) {
     fprintf(os, SOLUTION_MSG, a_coef, b_coef, c_coef);
-    return 1;
   }
 
   if (err == NON_INDEPENDENT_SYSTEM) {
     fprintf(es, "%s", NON_IND_MSG);
-    return 1;
   }
-
-  return 0;
 }
 
 static void free_resources(point_t *points[REQ_POINTS_AMOUNT]) {
