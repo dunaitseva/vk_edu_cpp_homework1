@@ -18,6 +18,8 @@ typedef enum {
   EFMTI,        // Error in format input
   EALLOC,       // Error in memory allocating
   EREPR,        // Error in float point digit representation
+  EEMTYSTR,     // Error in passing stream, possibly empty
+  ESTROPEN,     // Error string as stream opening
 } point_errors_t;
 
 /*
@@ -35,7 +37,7 @@ point_t *read_point(FILE *stream, int *err);
  * For particular example it can be used for some kind serialization
  * of point data.
  */
-point_t *create_point_from_string(char *str_point_repr, int *err);
+point_t *create_point_from_string(char *str_point_repr, size_t size, int *err);
 
 // Free resources from point. Return -1 if point si NULL and 0 on success.
 int delete_point(point_t *point);

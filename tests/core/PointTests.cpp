@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <string.h>
 
 #include <cstdio>
 #include <exception>
@@ -118,4 +119,75 @@ TEST_F(ReadPoint, IncorrectArgumentsStream) {
   point_t *p = read_point(nullptr, &status);
   ASSERT_EQ(p, nullptr);
   ASSERT_EQ(status, ESTREAM);
+}
+
+TEST(CreatePointFromString, CorrectArguments1) {
+  char point_string[] = "{1.2; 3.2}";
+  size_t p_size = strlen(point_string);
+
+  point_t *p = create_point_from_string(point_string, p_size, nullptr);
+  ASSERT_NE(p, nullptr);
+  delete_point(p);
+}
+
+TEST(CreatePointFromString, CorrectArguments2) {
+  char point_string[] = "{1e2; 1e-22}";
+  size_t p_size = strlen(point_string);
+
+  point_t *p = create_point_from_string(point_string, p_size, nullptr);
+  ASSERT_NE(p, nullptr);
+  delete_point(p);
+}
+
+TEST(CreatePointFromString, CorrectArguments3) {
+  char point_string[] = "{5; 3e-23}";
+  size_t p_size = strlen(point_string);
+
+  point_t *p = create_point_from_string(point_string, p_size, nullptr);
+  ASSERT_NE(p, nullptr);
+  delete_point(p);
+}
+
+TEST(CreatePointFromString, InorrectArguments1) {
+  char point_string1[] = "{5eeee; 3e-23}";
+  size_t p_size = strlen(point_string1);
+
+  int err = 0;
+  point_t *p = create_point_from_string(point_string1, p_size, &err);
+  EXPECT_EQ(p, nullptr);
+  ASSERT_EQ(err, EREPR);
+  delete_point(p);
+}
+
+TEST(CreatePointFromString, InorrectArguments2) {
+  char point_string1[] = "{5; 13e.-1123-23}";
+  size_t p_size = strlen(point_string1);
+
+  int err = 0;
+  point_t *p = create_point_from_string(point_string1, p_size, &err);
+  EXPECT_EQ(p, nullptr);
+  ASSERT_EQ(err, EREPR);
+  delete_point(p);
+}
+
+TEST(CreatePointFromString, InorrectArguments3) {
+  char point_string1[] = "{53.213, 5.21}";
+  size_t p_size = strlen(point_string1);
+
+  int err = 0;
+  point_t *p = create_point_from_string(point_string1, p_size, &err);
+  EXPECT_EQ(p, nullptr);
+  ASSERT_EQ(err, EFMTI);
+  delete_point(p);
+}
+
+TEST(CreatePointFromString, InorrectArguments4) {
+  char point_string1[] = "53.213 5.21";
+  size_t p_size = strlen(point_string1);
+
+  int err = 0;
+  point_t *p = create_point_from_string(point_string1, p_size, &err);
+  EXPECT_EQ(p, nullptr);
+  ASSERT_EQ(err, EFMTI);
+  delete_point(p);
 }
