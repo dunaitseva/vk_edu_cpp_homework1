@@ -2,20 +2,22 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "include/point.h"
+#include "include/dispatcher.h"
 
-#define POINT "{000000000; 1}"
+int main(int argc, char *argv[]) {
+  printf("%s", GREETING);
 
-int main() {
-  size_t string_size = strlen(POINT);
-  int err;
-  point_t *p = create_point_from_string(POINT, string_size, &err);
-  if (p == NULL) {
-    printf("Error code: %d\n", err);
-    return EXIT_FAILURE;
+  if (argc == COMMAND_LINE_MODE) {
+    if (command_line_mode(argv + 1, NULL, NULL)) {
+      return EXIT_SUCCESS;
+    }
+  } else if (argc == CONSOLE_APP_MODE) {
+    if (dispatcher(NULL, NULL, NULL)) {
+      return EXIT_SUCCESS;
+    }
+  } else {
+    printf("%s", ERROR_MODE_MSG);
   }
 
-  printf("%lf %lf\n", p->x, p->y);
-  delete_point(p);
-  return EXIT_SUCCESS;
+  return EXIT_FAILURE;
 }

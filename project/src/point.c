@@ -70,7 +70,7 @@ point_t *create_point_from_string(char *str_point_repr, size_t size, int *err) {
   // Open string as FILE with read option
   FILE *sstream = fmemopen(str_point_repr, size, "r");
   if (sstream == NULL) {
-    set_err_status(err, ESTREAM);
+    set_err_status(err, ESTROPEN);
     return NULL;
   }
 

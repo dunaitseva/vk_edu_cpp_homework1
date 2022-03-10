@@ -1,13 +1,14 @@
 cmake_minimum_required(VERSION 3.16)
 PROJECT(HW1)
 
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_FLAGS "-Werror -Wextra -Wpedantic -Wall")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS ${CMAKE_C_FLAGS})
 
-set(PROJECT_NAME parabola_builder)
+set(PROJECT_NAME quadratic)
 
 set(PROJECT_SOURCE_DIR project)
 set(PROJECT_LIB_SOURCE_DIR ${PROJECT_SOURCE_DIR}/src)
@@ -21,7 +22,8 @@ message("Added solver library with name ${PROJECT_CORE_LIB_NAME}")
 
 add_library(${PROJECT_INTERFACE_LIB_NAME} ${PROJECT_LIB_SOURCE_DIR}/dispatcher.c)
 target_include_directories(${PROJECT_INTERFACE_LIB_NAME} PUBLIC ${PROJECT_LIB_INCLUDE_DIR})
-message("Added solver library with name ${PROJECT_INTERFACE_LIB_NAME}")
+target_link_libraries(${PROJECT_INTERFACE_LIB_NAME} ${PROJECT_CORE_LIB_NAME})
+message("Added interface library with name ${PROJECT_INTERFACE_LIB_NAME}")
 
 # Enable generating coverage report in testing process
 option(COVERAGE "Enable generating coverage report" OFF)
@@ -29,6 +31,8 @@ if (COVERAGE)
     message("Enabled code coverage report generation")
     target_compile_options(${PROJECT_CORE_LIB_NAME} PUBLIC "--coverage")
     target_link_libraries(${PROJECT_CORE_LIB_NAME} PUBLIC gcov)
+    target_compile_options(${PROJECT_INTERFACE_LIB_NAME} PUBLIC "--coverage")
+    target_link_libraries(${PROJECT_INTERFACE_LIB_NAME} PUBLIC gcov)
 endif ()
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/main.c)
@@ -90,6 +94,47 @@ if (TEST)
         set(testing_targets
                 ${testing_targets};${testing_target};${testing_target}Address;${testing_target}Thread;${testing_target}Undefined
         )
+    endforeach ()
+
+    foreach (file IN ITEMS ${InterfaceTestsSRC})
+        message("${file} TEST FILE FOUND")
+        get_filename_component(testing_target ${file} NAME_WE)
+
+        # Adding executable tests without sanitizers
+        add_executable(${testing_target} ${file})
+        target_link_libraries(${testing_target} gtest_main)
+        target_link_libraries(${testing_target} ${PROJECT_CORE_LIB_NAME})
+        target_link_libraries(${testing_target} ${PROJECT_INTERFACE_LIB_NAME})
+
+        # Adding executable tests with Address sanitizer
+        add_executable(${testing_target}Address ${file})
+        target_link_libraries(${testing_target}Address gtest_main)
+        target_link_libraries(${testing_target}Address ${PROJECT_CORE_LIB_NAME})
+        target_link_libraries(${testing_target}Address ${PROJECT_INTERFACE_LIB_NAME})
+        target_compile_options(${testing_target}Address PUBLIC -fsanitize=address)
+        target_link_options(${testing_target}Address PUBLIC -fsanitize=address)
+
+        # Adding executable tests with Thread sanitizer
+        add_executable(${testing_target}Thread ${file})
+        target_link_libraries(${testing_target}Thread gtest_main)
+        target_link_libraries(${testing_target}Thread ${PROJECT_CORE_LIB_NAME})
+        target_link_libraries(${testing_target}Thread ${PROJECT_INTERFACE_LIB_NAME})
+        target_compile_options(${testing_target}Thread PUBLIC -fsanitize=thread)
+        target_link_options(${testing_target}Thread PUBLIC -fsanitize=thread)
+
+        # Adding executable tests with Undefined sanitizer
+        add_executable(${testing_target}Undefined ${file})
+        target_link_libraries(${testing_target}Undefined gtest_main)
+        target_link_libraries(${testing_target}Undefined ${PROJECT_CORE_LIB_NAME})
+        target_link_libraries(${testing_target}Undefined ${PROJECT_INTERFACE_LIB_NAME})
+        target_compile_options(${testing_target}Undefined PUBLIC -fsanitize=undefined)
+        target_link_options(${testing_target}Undefined PUBLIC -fsanitize=undefined)
+
+        message("${testing_target} TARGET TESTS KIT CREATED")
+
+        set(testing_targets
+                ${testing_targets};${testing_target};${testing_target}Address;${testing_target}Thread;${testing_target}Undefined
+                )
     endforeach ()
 
     message("TESTING TARGETS TOTAL: ${testing_targets}")

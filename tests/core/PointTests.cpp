@@ -1,7 +1,8 @@
 #include <gtest/gtest.h>
+extern "C" {
 #include <string.h>
+}
 
-#include <cstdio>
 #include <exception>
 #include <stdexcept>
 

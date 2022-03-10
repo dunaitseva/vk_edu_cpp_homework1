@@ -49,7 +49,7 @@ infer run --compilation-database build/compile_commands.json
 
 echo "START ANALYZE scan-build"
 cd build
-scan-build make parabola_builder
+scan-build make quadratic
 RET_CODE=$(($RET_CODE + $?))
 
 scan-build make parabola_solver
