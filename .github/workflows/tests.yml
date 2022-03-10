@@ -30,6 +30,12 @@ jobs:
           ./build/PointTestsAddress
           ./build/PointTestsThread
           ./build/PointTestsUndefined
+      - name: Run Tests InterfaceTests
+        run: |
+          valgrind --tool=memcheck ./build/InterfaceTests
+          ./build/InterfaceTestsAddress
+          ./build/InterfaceTestsThread
+          ./build/InterfaceTestsUndefined
       - name: Generate coverage report
         run: |
           ./scripts/coverage-generator.sh

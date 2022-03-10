@@ -12,4 +12,5 @@ jobs:
       - name: Building
         run: |
           ./scripts/build.sh
-          cd build && make parabola_builder
+          cd build
+          make
