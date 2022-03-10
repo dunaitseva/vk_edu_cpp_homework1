@@ -31,8 +31,9 @@ if (COVERAGE)
     message("Enabled code coverage report generation")
     target_compile_options(${PROJECT_CORE_LIB_NAME} PUBLIC "--coverage")
     target_link_libraries(${PROJECT_CORE_LIB_NAME} PUBLIC gcov)
-    target_compile_options(${PROJECT_INTERFACE_LIB_NAME} PUBLIC "--coverage")
-    target_link_libraries(${PROJECT_INTERFACE_LIB_NAME} PUBLIC gcov)
+
+#    target_compile_options(${PROJECT_INTERFACE_LIB_NAME} PUBLIC "--coverage")
+#    target_link_libraries(${PROJECT_INTERFACE_LIB_NAME} PUBLIC gcov)
 endif ()
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/main.c)
