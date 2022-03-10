@@ -28,13 +28,7 @@
 #define COMMAND_FORMAT_INPUT "%5s"
 #define SOL_CMD "solve"
 #define EXT_CMD "exit"
-#define PARTING "Thanks for using\n"
 #define ECMD_MSG "Commands available: solve, exit.\n"
-#define GREETING                               \
-  "Hello. This program will help you find\n"   \
-  "the coefficients of a quadratic function\n" \
-  "from 3 points on a plane.\n"                \
-  "----------------------------------------\n"
 #define CMD_INPUT_INVITE "Choose the command: "
 #define POINT_INPUT_INVITE "Enter point: "
 

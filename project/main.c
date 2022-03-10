@@ -4,6 +4,13 @@
 
 #include "include/dispatcher.h"
 
+#define GREETING                               \
+  "Hello. This program will help you find\n"   \
+  "the coefficients of a quadratic function\n" \
+  "from 3 points on a plane.\n"                \
+  "----------------------------------------\n"
+#define PARTING "Thanks for using\n"
+
 int main(int argc, char *argv[]) {
   printf("%s", GREETING);
 
