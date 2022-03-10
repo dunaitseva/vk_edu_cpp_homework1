@@ -20,7 +20,6 @@
 #define EFMTI_MSG "Error in point input format. Format sample {12.3; 23e-2}.\n"
 #define EREPR_MSG "Invalid number format\n"
 #define NON_IND_MSG "Solution was not found, non independent system\n"
-#define WRONG_INPUT_MSG "Solution can't be found. Solver input error.\n"
 #define OTHER_ERR_MSG \
   "A system error has occurred that does not depend on the user\n"
 

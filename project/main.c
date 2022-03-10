@@ -9,10 +9,12 @@ int main(int argc, char *argv[]) {
 
   if (argc == COMMAND_LINE_MODE) {
     if (command_line_mode(argv + 1, NULL, NULL)) {
+      fprintf(stdout, PARTING);
       return EXIT_SUCCESS;
     }
   } else if (argc == CONSOLE_APP_MODE) {
     if (dispatcher(NULL, NULL, NULL)) {
+      fprintf(stdout, PARTING);
       return EXIT_SUCCESS;
     }
   } else {

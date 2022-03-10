@@ -67,6 +67,7 @@ class ConsoleAppModeTests : public ::testing::Test {
 
   FILE *input_correct_stream_;
   FILE *input_incorrect_efmti_stream_;
+  FILE *input_correct_non_ind_sys_stream_;
   FILE *input_incorrect_unexp_cmd_stream_;
 
   constexpr static size_t MAX_INPUT = 2048;
@@ -84,6 +85,12 @@ class ConsoleAppModeTests : public ::testing::Test {
       "solve\n"
       "{12.3; 44.3}\n"
       "{2.1; 32.1}asdd\n";
+  char input_correct_non_ind_sys_[MAX_INPUT] =
+      "solve\n"
+      "{1; 1}\n"
+      "{1; 1}\n"
+      "{1; 1}\n"
+      "exit\n";
   char input_incorrect_unexp_cmd_[MAX_INPUT] =
       "delete smth\n"
       "exit\n";
@@ -98,12 +105,15 @@ class ConsoleAppModeTests : public ::testing::Test {
     input_correct_stream_ = fmemopen(input_correct_, MAX_INPUT, "r");
     input_incorrect_efmti_stream_ =
         fmemopen(input_incorrect_efmti_, MAX_INPUT, "r");
+    input_correct_non_ind_sys_stream_ =
+        fmemopen(input_correct_non_ind_sys_, MAX_INPUT, "r");
     input_incorrect_unexp_cmd_stream_ =
         fmemopen(input_incorrect_unexp_cmd_, MAX_INPUT, "r");
 
     if (output_stream_ == nullptr || error_stream_ == nullptr ||
         input_correct_stream_ == nullptr ||
         input_incorrect_efmti_stream_ == nullptr ||
+        input_correct_non_ind_sys_stream_ == nullptr ||
         input_incorrect_unexp_cmd_stream_ == nullptr) {
       throw std::runtime_error("One of streams was not opened");
     }
@@ -114,6 +124,7 @@ class ConsoleAppModeTests : public ::testing::Test {
     fclose(error_stream_);
     fclose(input_correct_stream_);
     fclose(input_incorrect_efmti_stream_);
+    fclose(input_correct_non_ind_sys_stream_);
     fclose(input_incorrect_unexp_cmd_stream_);
   }
 };
@@ -186,6 +197,11 @@ TEST_F(CommandLineModeTests, IncorrectArgumentsEREPR3) {
   ASSERT_STREQ(error_buffer_, EREPR_MSG);
 }
 
+TEST_F(CommandLineModeTests, EmtyArguments) {
+  int status = command_line_mode(nullptr, output_stream_, error_stream_);
+  ASSERT_EQ(status, 0);
+}
+
 TEST(GetCmdTest, SolveCommand) {
   char input_buff[MAX_COMMAND_LENGTH + 1] = "solve\n";
   FILE *input_stream = fmemopen(input_buff, MAX_COMMAND_LENGTH + 1, "r");
@@ -215,11 +231,11 @@ TEST(GetCmdTest, UnexpectedCommand) {
 
 TEST_F(ConsoleAppModeTests, CorrectInput) {
   char expected_output[MAX_OUTPUT] =
-      "Choose the command: Enter point: Enter point: Enter point: coefficient "
-      "a: -0.105898\n"
+      "Choose the command: Enter point: Enter point: Enter point: "
+      "coefficient a: -0.105898\n"
       "coefficient b: 2.721008\n"
       "coefficient c: 26.852892\n"
-      "Choose the command: Thanks for using\n";
+      "Choose the command: ";
 
   int status = dispatcher(input_correct_stream_, output_stream_, error_stream_);
   ASSERT_EQ(status, 1);
@@ -248,4 +264,13 @@ TEST_F(ConsoleAppModeTests, IncorrectInputUnexpectedEfmti) {
   fflush(output_stream_);
   fflush(error_stream_);
   ASSERT_STREQ(error_buffer_, EFMTI_MSG);
+}
+
+TEST_F(ConsoleAppModeTests, CorectArgumetnsNonIndependernSystem) {
+  int status = dispatcher(input_correct_non_ind_sys_stream_, output_stream_,
+                          error_stream_);
+  ASSERT_EQ(status, 1);
+  fflush(output_stream_);
+  fflush(error_stream_);
+  ASSERT_STREQ(error_buffer_, NON_IND_MSG);
 }

@@ -46,7 +46,7 @@ int dispatcher(FILE *is, FILE *os, FILE *es) {
   //  fprintf(os, GREETING);
 
   while (1) {
-    fprintf(os, CMD_INPUT_INVITE);
+    fprintf(os, "%s", CMD_INPUT_INVITE);
     int cmd = get_cmd(is);
     switch (cmd) {
       case CSOL:
@@ -56,11 +56,10 @@ int dispatcher(FILE *is, FILE *os, FILE *es) {
         break;
 
       case CEXT:
-        fprintf(os, PARTING);
         return 1;
 
       default:
-        fprintf(es, ECMD_MSG);
+        fprintf(es, "%s", ECMD_MSG);
     }
   }
 }
@@ -88,7 +87,7 @@ static int solution_command(FILE *is, FILE *os, FILE *es) {
   memset(points, 0, sizeof(point_t *) * REQ_POINTS_AMOUNT);
   for (int i = 0; i < REQ_POINTS_AMOUNT; ++i) {
     int err;
-    fprintf(os, POINT_INPUT_INVITE);
+    fprintf(os, "%s", POINT_INPUT_INVITE);
     points[i] = read_point(is, &err);
 
     if (points[i] == NULL) {
@@ -107,13 +106,13 @@ static int solution_command(FILE *is, FILE *os, FILE *es) {
 static void print_error_msg(int err, FILE *es) {
   switch (err) {
     case EFMTI:
-      fprintf(es, EFMTI_MSG);
+      fprintf(es, "%s", EFMTI_MSG);
       break;
     case EREPR:
-      fprintf(es, EREPR_MSG);
+      fprintf(es, "%s", EREPR_MSG);
       break;
     default:
-      fprintf(es, OTHER_ERR_MSG);
+      fprintf(es, "%s", OTHER_ERR_MSG);
   }
 }
 
@@ -130,13 +129,8 @@ static int show_solution(point_t *points[REQ_POINTS_AMOUNT], FILE *os,
   }
 
   if (err == NON_INDEPENDENT_SYSTEM) {
-    fprintf(es, NON_IND_MSG);
-    return 0;
-  }
-
-  if (err == WRONG_INPUT) {
-    fprintf(es, WRONG_INPUT_MSG);
-    return 0;
+    fprintf(es, "%s", NON_IND_MSG);
+    return 1;
   }
 
   return 0;
