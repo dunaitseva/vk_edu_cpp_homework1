@@ -6,7 +6,7 @@ mkdir -p $TMP_DIR
 touch $LOG_FILE
 mkdir $BUILD_DIR && echo "Creating $BUILD_DIR directory"
 
-#Installing fbinfer
+Installing fbinfer
 echo "START INSTALLING fbinfer"
 FILE=/opt/infer-linux64-v$VERSION/bin/infer
 if test -f "$FILE"; then
@@ -30,13 +30,15 @@ sudo apt-get -qq install clang-tools
 echo "START INSTALLING cppcheck"
 sudo apt-get -qq install cppcheck
 
+echo "START ANALYZE cppcheck"
+cppcheck --language=c -std=c99 project
+cppcheck tests
+RET_CODE=$(($RET_CODE + $?))
+
 RET_CODE=0
 SOURCES_DIRS=("project" "tests")
 for dir in ${SOURCES_DIRS[*]}
 do
-echo "START ANALYZE cppcheck"
-cppcheck $dir
-RET_CODE=$(($RET_CODE + $?))
 
 echo "START ANALYZE cpplint"
 cpplint --recursive --filter=-legal/copyright,-readability/casting $dir

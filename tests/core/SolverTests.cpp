@@ -1,7 +1,7 @@
-#include <gtest/gtest.h>
+#include "gtest/gtest.h"
 
 extern "C" {
-#include "../include/solver.h"
+#include "include/solver.h"
 }
 
 constexpr double ABS_SOL_ERROR = 1e-5;

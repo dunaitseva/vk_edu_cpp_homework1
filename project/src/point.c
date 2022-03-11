@@ -1,4 +1,4 @@
-#include "../include/point.h"
+#include "include/point.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -47,7 +47,6 @@ point_t *read_point(FILE *stream, int *err) {
    tmp_ptr_<coord>_repr will refer after last byte used in conversion. So
    if all string's bytes of digit was performed, tmp_ptr_<coord>_repr should
    have value 0 or '\0'. In other cases it means that error occurred. */
-  // if (y_string_repr == tmp_ptr_x_repr || tmp_ptr_y_repr == y_string_repr) {
   if (*tmp_ptr_x_repr || *tmp_ptr_y_repr) {
     set_err_status(err, EREPR);
     return NULL;

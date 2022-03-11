@@ -1,10 +1,10 @@
-#include "../include/dispatcher.h"
+#include "include/dispatcher.h"
 
 #include <stdio.h>
 #include <string.h>
 
-#include "../include/point.h"
-#include "../include/solver.h"
+#include "include/point.h"
+#include "include/solver.h"
 
 static void show_solution(point_t *points[REQ_POINTS_AMOUNT], FILE *os,
                           FILE *es);
@@ -43,7 +43,6 @@ int dispatcher(FILE *is, FILE *os, FILE *es) {
   is = (is == NULL ? stdin : is);
   os = (os == NULL ? stdout : os);
   es = (es == NULL ? stderr : es);
-  //  fprintf(os, GREETING);
 
   while (1) {
     fprintf(os, "%s", CMD_INPUT_INVITE);

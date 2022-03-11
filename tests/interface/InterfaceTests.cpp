@@ -1,12 +1,11 @@
-#include <gtest/gtest.h>
-
 #include <exception>
 #include <stdexcept>
-#include <string_view>
+
+#include "gtest/gtest.h"
 
 extern "C" {
-#include "../include/dispatcher.h"
-#include "../include/point.h"
+#include "include/dispatcher.h"
+#include "include/point.h"
 }
 
 class CommandLineModeTests : public ::testing::Test {

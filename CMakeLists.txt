@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 PROJECT(HW1)
 
-set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_FLAGS "-Werror -Wextra -Wpedantic -Wall")
 
@@ -12,7 +11,7 @@ set(PROJECT_NAME quadratic)
 
 set(PROJECT_SOURCE_DIR project)
 set(PROJECT_LIB_SOURCE_DIR ${PROJECT_SOURCE_DIR}/src)
-set(PROJECT_LIB_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
+set(PROJECT_LIB_INCLUDE_DIR ${PROJECT_SOURCE_DIR})
 set(PROJECT_CORE_LIB_NAME parabola_solver)
 set(PROJECT_INTERFACE_LIB_NAME interface)
 

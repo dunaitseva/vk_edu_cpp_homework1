@@ -1,7 +1,7 @@
 #ifndef PROJECT_INCLUDE_SOLVER_H_
 #define PROJECT_INCLUDE_SOLVER_H_
 
-#include "./point.h"
+#include "include/point.h"
 
 typedef enum {
   SOLUTION_FOUND,

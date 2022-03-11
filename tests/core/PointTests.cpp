@@ -1,13 +1,11 @@
-#include <gtest/gtest.h>
-extern "C" {
-#include <string.h>
-}
-
 #include <exception>
 #include <stdexcept>
+#include <cstring>
+
+#include "gtest/gtest.h"
 
 extern "C" {
-#include "../include/point.h"
+#include "include/point.h"
 }
 
 class ReadPoint : public ::testing::Test {
@@ -67,7 +65,7 @@ TEST(DeletePoint, CorrectArguments) {
   point_t *p = create_point(0.0, 0.0, nullptr);
   EXPECT_NE(p, nullptr);
   int status = delete_point(p);
-  ASSERT_EQ(status, 0);
+  EXPECT_EQ(status, 0);
 }
 
 TEST(DeletePoint, InorrectArguments) {

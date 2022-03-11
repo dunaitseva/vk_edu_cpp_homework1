@@ -20,19 +20,19 @@ jobs:
           cd ..
       - name: Run Tests SolverTests
         run: |
-          valgrind --tool=memcheck ./build/SolverTests
+          valgrind --tool=memcheck --leak-check=full ./build/SolverTests
           ./build/SolverTestsAddress
           ./build/SolverTestsThread
           ./build/SolverTestsUndefined
       - name: Run Tests PointTests
         run: |
-          valgrind --tool=memcheck ./build/PointTests
+          valgrind --tool=memcheck --leak-check=full ./build/PointTests
           ./build/PointTestsAddress
           ./build/PointTestsThread
           ./build/PointTestsUndefined
       - name: Run Tests InterfaceTests
         run: |
-          valgrind --tool=memcheck ./build/InterfaceTests
+          valgrind --tool=memcheck --leak-check=full ./build/InterfaceTests
           ./build/InterfaceTestsAddress
           ./build/InterfaceTestsThread
           ./build/InterfaceTestsUndefined
