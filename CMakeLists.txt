@@ -28,7 +28,7 @@ message("Added interface library with name ${PROJECT_INTERFACE_LIB_NAME}")
 option(COVERAGE "Enable generating coverage report" OFF)
 if (COVERAGE)
     message("Enabled code coverage report generation")
-    target_compile_options(${PROJECT_CORE_LIB_NAME} PUBLIC "--coverage")
+    target_compile_options(${PROJECT_CORE_LIB_NAME} PUBLIC "--coverage" "-O0")
     target_link_libraries(${PROJECT_CORE_LIB_NAME} PUBLIC gcov)
 
 #    target_compile_options(${PROJECT_INTERFACE_LIB_NAME} PUBLIC "--coverage")
